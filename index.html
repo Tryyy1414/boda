@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Kimberly & Paolo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="audio/saxoversion.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="landing" class="screen">
+        <h2 class="serif section-title">NUESTRA BODA</h2>
+        <h1 class="cursive main-names">Kimberly & Paolo</h1>
+        <p class="date-main">29 - AGOSTO - 2025</p>
+
+        <div class="envelope-wrapper" onclick="abrirInvitacion()">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="inner-letter">
+                    <p class="cursive letter-text">Nuestra Boda</p>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="flap"></div>
+                <div class="seal"></div>
+            </div>
+        </div>
+        
+        <p class="click-hint">CLICK PARA ABRIR LA INVITACIÓN</p>
+    </div>
+
+    <div id="details" class="screen" style="display: none; opacity: 0;">
+        <h3 class="serif sub-title">NOS CASAMOS</h3>
+        
+        <div class="photo-frame"></div>
+        
+        <h1 class="cursive main-names">Kimberly & Paolo</h1>
+        <p class="subtitle serif">Queremos que seas parte de este día tan especial</p>
+        
+        <div class="date-block">
+            <span class="day-name">SÁBADO</span>
+            <span class="big-day">29</span>
+            <span class="month-time">10:00 hs<br>AGOSTO</span>
+        </div>
+        
+        <div class="location-box">
+            <p class="venue-name">Municipalidad Distrital de Santa Rosa</p>
+            <p class="rsvp-text">Confirmar Asistencia al: <strong>(55) 1234-5678</strong></p>
+            
+            <div class="map-wrapper">
+                <iframe src="https://maps.google.com/maps?q=Municipalidad+Distrital+de+Santa+Rosa,+Lima,+Peru&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
