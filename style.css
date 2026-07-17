@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--bg-cream);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background: radial-gradient(circle at 50% 30%, #ffffff 0%, var(--bg-cream) 100%);
     color: var(--text-dark-green);
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
@@ -137,7 +137,7 @@ body {
     height: 135%; 
     z-index: 3; 
     pointer-events: none;
-    background-image: url('img/flores.svg'); /* AQUÍ SE CARGA TU SVG */
+    background-image: url('img/flores.png'); 
     background-size: contain; 
     background-position: center;
     background-repeat: no-repeat;
@@ -188,15 +188,13 @@ body {
 }
 
 .location-card {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid var(--gold-light);
     border-radius: 16px;
     padding: 28px 22px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(36, 48, 32, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.5);
-    transition: all 0.35s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -306,45 +304,45 @@ body {
     box-shadow: 0 6px 16px rgba(207, 177, 96, 0.4);
 }
 
-/* Compatibilidad con clases antiguas si existieran */
-.location-box { text-align: center; line-height: 2; margin-top: 20px; background: rgba(255,255,255,0.4); padding: 25px; border-radius: 4px; width: 100%; max-width: 500px; }
-.venue-name { font-size: 1rem; font-weight: 600; letter-spacing: 1px; }
-
 /* ==========================================================================
-   DISEÑO RESPONSIVO (Tablets y Móviles)
+   Animación sutil de fondo (Pétalos de rosa cayendo)
    ========================================================================== */
-@media (max-width: 768px) {
-    .sub-title { font-size: 1.3rem; }
-    .cursive { font-size: 3.2rem; }
-    .date-block .big-day { font-size: 3.2rem; }
-    
-    .photo-frame-border { width: 240px; height: 240px; }
-    .envelope-wrapper { transform: scale(0.9); margin: 20px 0; }
-    
-    .locations-grid { grid-template-columns: 1fr; gap: 20px; }
-    .venue-title { min-height: auto; }
+#bg-animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
 }
 
-@media (max-width: 480px) {
-    .screen { padding: 40px 15px; }
-    .sub-title { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; }
-    .cursive { font-size: 2.6rem; }
-    .section-title { font-size: 0.8rem; letter-spacing: 4px; margin-top: 15px; }
-    .date-main { font-size: 0.85rem; letter-spacing: 3px; }
-    
-    .envelope-wrapper { transform: scale(0.8); margin: 10px 0; }
-    .photo-frame-border { width: 200px; height: 200px; }
-    
-    .subtitle { font-size: 0.9rem; letter-spacing: 4px; margin-bottom: 20px; }
-    .date-block { gap: 15px; padding: 12px 0; }
-    .date-block span { font-size: 0.75rem; }
-    .date-block .big-day { font-size: 2.8rem; padding: 0 10px; }
-
-    .locations-section { margin-top: 25px; }
-    .section-subtitle { font-size: 1rem; margin-bottom: 20px; }
-    .location-card { padding: 20px 15px; }
-    .venue-title { font-size: 1rem; }
-    .map-wrapper iframe { height: 180px; }
-    .btn-location { width: 100%; padding: 10px; }
+.falling-petal {
+    position: absolute;
+    top: -40px;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: fallAndSway linear infinite;
 }
+
+@keyframes fallAndSway {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) rotate(0deg) rotateX(0deg);
+    }
+    10% {
+        opacity: var(--petal-opacity, 0.7);
+    }
+    90% {
+        opacity: var(--petal-opacity, 0.7);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(105vh) translateX(var(--drift-x, 80px)) rotate(360deg) rotateX(180deg);
+    }
+}
+
+
 

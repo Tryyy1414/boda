@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Inicializar animación sutil de pétalos de rosa y mariposas flotantes
+    initBackgroundAnimation();
+
     // Animación sutil de levitación para el sobre, invita a hacer clic
     gsap.to(".envelope-wrapper", {
         y: -5,
@@ -78,3 +81,53 @@ function abrirInvitacion() {
         onStart: () => window.scrollTo({ top: 0, behavior: 'smooth' })
     });
 }
+
+/**
+ * Genera una animación sutil e interactiva de pétalos de rosa cayendo en el fondo
+ */
+function initBackgroundAnimation() {
+    const container = document.getElementById('bg-animation-container');
+    if (!container) return;
+
+    // Paleta romántica para los pétalos
+    const petalColors = ['#f4c2c2', '#e8a5b8', '#cfb160', '#f7d6de', '#e4b6c3'];
+    
+    // Generar Pétalos de Rosa optimizados (10 simultáneos)
+    const petalCount = 10;
+    for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'falling-petal';
+        
+        const size = Math.floor(Math.random() * 10) + 14; // 14px a 24px
+        const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+        const left = Math.random() * 95;
+        const duration = Math.random() * 6 + 9; // 9s a 15s
+        const delay = Math.random() * 8;
+        const opacity = (Math.random() * 0.35 + 0.35).toFixed(2);
+        const driftX = (Math.random() * 100 - 50).toFixed(0) + 'px';
+
+        petal.style.left = left + '%';
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.setProperty('--petal-opacity', opacity);
+        petal.style.setProperty('--drift-x', driftX);
+        petal.style.animationDuration = duration + 's';
+        petal.style.animationDelay = delay + 's';
+
+        petal.innerHTML = `
+            <svg viewBox="0 0 30 30" width="100%" height="100%" style="color: ${color}">
+                <path d="M15 3 C 25 3, 28 15, 15 27 C 2 15, 5 3, 15 3 Z" fill="currentColor"/>
+            </svg>
+        `;
+        container.appendChild(petal);
+    }
+
+    // Pausar animaciones en segundo plano para ahorrar batería y CPU
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            container.style.display = 'none';
+        } else {
+            container.style.display = 'block';
+        }
+    });
+}
